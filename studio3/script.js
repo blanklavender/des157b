@@ -23,7 +23,6 @@ function draw() {
 
   for (let zAngle = 0; zAngle < 180; zAngle += 30) {
 
-    // one image per FULL ring
     let layerIndex = zAngle / 30;
     let currentImg = imgs[layerIndex % imgs.length];
 
@@ -35,7 +34,6 @@ function draw() {
 
       translate(0, 400, 0);
 
-      // keep images flat
       rotateX(-xAngle);
       rotateZ(-zAngle);
 
