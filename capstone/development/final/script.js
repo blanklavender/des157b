@@ -104,9 +104,9 @@
 
 
     function startWebGazer() {
-
+        console.log('startWebGazer started')
         webgazer.setGazeListener(function (data) {
-
+            console.log('setGazeListener started')
             if (!data) return;
 
             const lookingAtScreen =
@@ -116,8 +116,10 @@
                 data.y < window.innerHeight;
 
             if (!lookingAtScreen) {
+                console.log('not looking at screen');
                 focusWarning.classList.add('showing');
             } else {
+                console.log('looking at screen');
                 focusWarning.classList.remove('showing');
             }
 
