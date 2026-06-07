@@ -84,7 +84,7 @@
     });
 
     // BEGIN BUTTON
-    beginButton.addEventListener('click', function () {
+    beginButton.addEventListener('click', async function () {
 
         console.log('begin clicked');
 
