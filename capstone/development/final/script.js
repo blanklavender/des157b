@@ -105,36 +105,54 @@
     // .begin();
 
 
-    function startWebGazer() {
-        console.log('startWebGazer started')
-        webgazer.setGazeListener(function (data) {
-            console.log('setGazeListener started')
-            if (!data) return;
+    // function startWebGazer() {
+    //     console.log('startWebGazer started')
+    //     webgazer.setGazeListener(function (data) {
+    //         console.log('setGazeListener started')
+    //         if (!data) return;
 
-            console.log('gaze data received:', data);
-            console.log('window dimensions:', window.innerWidth, window.innerHeight);
+    //         console.log('gaze data received:', data);
+    //         console.log('window dimensions:', window.innerWidth, window.innerHeight);
 
-            const lookingAtScreen =
-                data.x > 0 &&
-                data.y > 0 &&
-                data.x < window.innerWidth &&
-                data.y < window.innerHeight;
+    //         const lookingAtScreen =
+    //             data.x > 0 &&
+    //             data.y > 0 &&
+    //             data.x < window.innerWidth &&
+    //             data.y < window.innerHeight;
 
-            if (!lookingAtScreen) {
-                console.log('not looking at screen');
-                focusWarning.classList.add('showing');
-            } else {
-                console.log('looking at screen');
-                focusWarning.classList.remove('showing');
-            }
+    //         if (!lookingAtScreen) {
+    //             console.log('not looking at screen');
+    //             focusWarning.classList.add('showing');
+    //         } else {
+    //             console.log('looking at screen');
+    //             focusWarning.classList.remove('showing');
+    //         }
 
-            webgazer.showVideoPreview(true);
-            webgazer.showPredictionPoints(false);
+    //         webgazer.showVideoPreview(true);
+    //         webgazer.showPredictionPoints(false);
 
-        })
+    //     })
 
-            .begin();
-    }
+    //         .begin();
+    // }
+
+     async function startWebGazer() {
+                    await webgazer.setGazeListener(function (data) {
+                        if (!data) return;
+                        console.log('gaze data received:', data);
+                        console.log('gaze data received:', data);
+
+                        const lookingAtScreen =
+                            data.x > 0 && data.y > 0 &&
+                            data.x < window.innerWidth &&
+                            data.y < window.innerHeight;
+
+                        focusWarning.classList.toggle('showing', !lookingAtScreen);
+                    }).begin();
+
+                    webgazer.showVideoPreview(true);
+                    webgazer.showPredictionPoints(false);
+                }
 
     // CALIBRATION 
     calDots.forEach(function (dot) {
@@ -167,23 +185,6 @@
 
                 setTimeout(startWebGazer, 100);
 
-                async function startWebGazer() {
-                    await webgazer.setGazeListener(function (data) {
-                        if (!data) return;
-                        console.log('gaze data received:', data);
-                        console.log('gaze data received:', data);
-
-                        const lookingAtScreen =
-                            data.x > 0 && data.y > 0 &&
-                            data.x < window.innerWidth &&
-                            data.y < window.innerHeight;
-
-                        focusWarning.classList.toggle('showing', !lookingAtScreen);
-                    }).begin();
-
-                    webgazer.showVideoPreview(true);
-                    webgazer.showPredictionPoints(false);
-                }
             }
 
         });
